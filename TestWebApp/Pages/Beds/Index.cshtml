@@ -1,0 +1,93 @@
+﻿@page
+@model TestWebApp.Pages.Beds.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].BedNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].PresentingIssue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].LastComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].LastModified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed[0].Nurse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bed) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            @if (item.Status == false){
+                <td>
+                    Free
+                </td>
+                    
+             }
+             @if (item.Status == true) {
+                 <td>
+                    In Use 
+                 </td>
+             }
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PresentingIssue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nurse)
+            </td>
+            @if (item.Status == false){
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Admit</a> 
+                </td>
+                    
+             }
+             @if (item.Status == true) {
+                 <td>
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Discharge</a> 
+                 </td>
+             }
+        </tr>
+}
+    </tbody>
+</table>
